@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ChessMovement : MonoBehaviour
+public class ChessMovement : NetworkBehaviour
 {
     public GUIButton move;
     public GUIButton left;
@@ -10,7 +11,7 @@ public class ChessMovement : MonoBehaviour
 
     const float MOVE_DISTANCE = 0.2f;
     float move_speed = 2.0f;
-    float move_lerp = 0.0f;
+    float move_lerp = 1.0f;
     Vector3 start_position = Vector3.zero;
 
     const int ROTATION_AMOUNT = 90;
@@ -24,11 +25,25 @@ public class ChessMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        if (isLocalPlayer)
+        {
+            move = GameObject.Find("MoveButton").GetComponent<GUIButton>();
+            left = GameObject.Find("RotateLeftButton").GetComponent<GUIButton>();
+            right = GameObject.Find("RotateRightButton").GetComponent<GUIButton>();
+
+            List<float> offsets = new List<float> { -0.4f, -0.2f, 0.0f, 0.2f, 0.4f };
+            Vector3 position = new Vector3(offsets[Random.Range(0, 4)], 0, offsets[Random.Range(0, 4)]);
+            transform.position = position;
+        }
     }
     
     void Update()
     {
-        Move();
+        if (isLocalPlayer)
+        {
+            Move();
+        }
     }
 
     void Move()
