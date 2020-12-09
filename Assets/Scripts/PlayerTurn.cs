@@ -13,7 +13,7 @@ public class PlayerTurn : NetworkBehaviour
     private int movement = 25;
     private int exp = 0;
 
-    const float ATTACK_SPEED = 0.6f;
+    const float ATTACK_SPEED = 0.75f;
     float attack_lerp = 1.0f;
 
     const float MOVE_DISTANCE = 0.2f;
@@ -103,17 +103,24 @@ public class PlayerTurn : NetworkBehaviour
                 }
                 if (closest_enemy)
                 {
-                    StartCoroutine(DestroyEnemyAfterSecond(closest_enemy));
+                    StartCoroutine(DestroyEnemyAfterSecond(closest_enemy.GetComponent<NetworkIdentity>().netId));
                 }
             }
         }
     }
 
-    IEnumerator DestroyEnemyAfterSecond(GameObject enemy)
+    IEnumerator DestroyEnemyAfterSecond(NetworkInstanceId netId)
     {
         yield return new WaitForSeconds(1.0f);
-        NetworkServer.Destroy(enemy);
         exp += 10;
         experienceText.text = exp + "\nXP";
+        CmdDestroyEnemy(netId);
+    }
+
+    [Command]
+    void CmdDestroyEnemy(NetworkInstanceId netId)
+    {
+        GameObject enemy = NetworkServer.FindLocalObject(netId);
+        NetworkServer.Destroy(enemy);
     }
 }
