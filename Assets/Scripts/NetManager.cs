@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetManager : NetworkManager
+public class NetManager: NetworkManager
 {
     public GameObject menu;
-    public MapGenerator map_generator;
 
     public void Host()
     {
-        NetworkManager.singleton.networkAddress = "192.168.100.77";
-        NetworkManager.singleton.networkPort = 7777;
+        Common();
         NetworkManager.singleton.StartHost();
-        menu.SetActive(false);
     }
 
     public void Join()
     {
-        NetworkManager.singleton.networkAddress = "192.168.100.77";
-        NetworkManager.singleton.networkPort = 7777;
+        Common();
         NetworkManager.singleton.StartClient();
+    }
+
+    void Common()
+    {
+        NetworkManager.singleton.networkAddress = "90.64.193.109";
+        NetworkManager.singleton.networkPort = 7777;
         menu.SetActive(false);
     }
 
@@ -29,7 +31,7 @@ public class NetManager : NetworkManager
         if (Input.GetKeyDown(KeyCode.H))
         {
             Host();
-            map_generator.SpawnMap();
+            GameObject.Find("MapGenerator").GetComponent<MapGenerator>().SpawnMap();
         }
     }
 }

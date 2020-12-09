@@ -3366,14 +3366,13 @@ GameObject:
   - component: {fileID: 3429277899569648572}
   - component: {fileID: 3429277899199040781}
   - component: {fileID: 4288978034433809282}
-  - component: {fileID: 8002582751846076161}
   - component: {fileID: 4288978033342721923}
   - component: {fileID: 1239056553868181485}
   - component: {fileID: 883405746452246275}
   - component: {fileID: -6540806528783311667}
   m_Layer: 8
   m_Name: Multiplayer Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3431,18 +3430,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &8002582751846076161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3429277899569876892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1111d40866e78ac44ae85de46762b0f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4288978033342721923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3455,9 +3442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc89985e80672c4bb9a5ac056bef51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 0}
-  left: {fileID: 0}
-  right: {fileID: 0}
 --- !u!114 &1239056553868181485
 MonoBehaviour:
   m_ObjectHideFlags: 0
