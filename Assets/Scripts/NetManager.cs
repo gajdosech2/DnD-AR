@@ -11,6 +11,7 @@ public class NetManager: NetworkManager
     {
         Common();
         NetworkManager.singleton.StartHost();
+        GameObject.Find("MapGenerator").GetComponent<MapGenerator>().SpawnMap();
     }
 
     public void Join()
@@ -31,12 +32,4 @@ public class NetManager: NetworkManager
         menu.SetActive(true);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Host();
-            GameObject.Find("MapGenerator").GetComponent<MapGenerator>().SpawnMap();
-        }
-    }
 }
