@@ -17,7 +17,7 @@ public class DiceRollManager : MonoBehaviour
 
     float maxTime = 3.0f;
     float startTime = 0;
-
+    
     public void throwDice()
     {
         if (amount > 0 && type > 0)
@@ -43,6 +43,25 @@ public class DiceRollManager : MonoBehaviour
         }
     }
 
+    public void setAmount(int nAmount)
+    {
+        amount = nAmount;
+    }
+
+    public void setAmount(string strAmount)
+    {
+        if (strAmount.Length > 0)
+        {
+            int nAmount;
+            amount = int.TryParse(strAmount, out nAmount) ? nAmount : 0;
+        }
+    }
+
+    public void setType(int nType)
+    {
+        type = nType;
+    }
+
     public int getResultsSum()
     {
         int sum = 0;
@@ -66,25 +85,6 @@ public class DiceRollManager : MonoBehaviour
             strResults += results[i] + " ";
         }
         return strResults;
-    }
-
-    public void setAmount(int nAmount)
-    {
-        amount = nAmount;
-    }
-
-    public void setAmount(string strAmount)
-    {
-        if (strAmount.Length > 0)
-        {
-            int nAmount;
-            amount = int.TryParse(strAmount, out nAmount) ? nAmount : 0;
-        }        
-    }
-
-    public void setType(int nType)
-    {
-        type = nType;
     }
 
     private void Update()
