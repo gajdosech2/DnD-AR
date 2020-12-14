@@ -7,6 +7,13 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+/UnityPlayer.dll
+/MonoBleedingEdge/
+/DND_AR_Battle_Data/
+/UnityCrashHandler64.exe
+/DND_AR_Battle.exe
+
+
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
 
