@@ -13,9 +13,6 @@
 /UnityCrashHandler64.exe
 /DND_AR_Battle.exe
 
-/IGNOREME/
-
-
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
 
