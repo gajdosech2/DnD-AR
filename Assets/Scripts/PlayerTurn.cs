@@ -35,7 +35,7 @@ public class PlayerTurn : NetworkBehaviour
             move = GameObject.Find("MoveButton").GetComponent<GUIButton>();
             left = GameObject.Find("RotateLeftButton").GetComponent<GUIButton>();
             right = GameObject.Find("RotateRightButton").GetComponent<GUIButton>();
-            attack = GameObject.Find("DiceButton").GetComponent<GUIButton>();
+            attack = GameObject.Find("AttackButton").GetComponent<GUIButton>();
             movementText = GameObject.Find("MovementText").GetComponent<Text>();
             experienceText = GameObject.Find("ExperienceText").GetComponent<Text>();
 
