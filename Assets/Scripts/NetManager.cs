@@ -26,6 +26,11 @@ public class NetManager: NetworkManager
         menu.SetActive(false);
     }
 
+    void Start()
+    {
+        menu.SetActive(true);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
