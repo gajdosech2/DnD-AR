@@ -11,7 +11,9 @@ public class DiceRollManager : MonoBehaviour
 
     List<int> results;
 
-    public GameObject panel;
+    public GameObject questionManager;
+
+    public GameObject diceRollPanel;
     public GameObject btnResults;
     public GameObject btnResultsSum;
 
@@ -32,14 +34,11 @@ public class DiceRollManager : MonoBehaviour
                 sum += value;
                 strResults += value + ((i+1) == amount ? "" : " + ");
             }
-            panel.SetActive(false);
-            startTime = Time.time;
-
-            btnResults.SetActive(true);
-            btnResultsSum.SetActive(true);
-
             btnResults.GetComponent<UnityEngine.UI.Text>().text = strResults;
             btnResultsSum.GetComponent<UnityEngine.UI.Text>().text = sum + "";
+
+            diceRollPanel.SetActive(false);
+            questionManager.GetComponent<QuestionManager>().activateSelf();
         }
     }
 
@@ -60,6 +59,18 @@ public class DiceRollManager : MonoBehaviour
     public void setType(int nType)
     {
         type = nType;
+    }
+
+    public void displayRoll()
+    {
+        startTime = Time.time;
+        btnResults.SetActive(true);
+        btnResultsSum.SetActive(true);
+    }
+
+    public int getType()
+    {
+        return type;
     }
 
     public int getResultsSum()
@@ -90,13 +101,14 @@ public class DiceRollManager : MonoBehaviour
     private void Update()
     {
         if (btnResults != null && startTime > 0)
+        {
+            float elapsedTime = Time.time - startTime;
+            if (elapsedTime > maxTime)
             {
-                float elapsedTime = Time.time - startTime;
-                if (elapsedTime > maxTime)
-                {
-                    btnResults.SetActive(false);
-                    btnResultsSum.SetActive(false);
-                }
+                startTime = 0;
+                btnResults.SetActive(false);
+                btnResultsSum.SetActive(false);
             }
+        }
     }
 }
