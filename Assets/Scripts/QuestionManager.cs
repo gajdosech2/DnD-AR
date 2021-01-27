@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour
 {
-
     public GameObject diceRollManager;
     public GameObject questionPanel;
     public GameObject submitBtn;

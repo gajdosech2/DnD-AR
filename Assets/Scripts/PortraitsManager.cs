@@ -2,19 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class PlayersManager : MonoBehaviour
+public class PortraitsManager : MonoBehaviour
 {
     public GameObject[] portraits;
     public Material[] mats;
 
     int lastLength = 0;
     int myId = -1;
-
-    public int GetId()
-    {
-        return myId;
-    }
 
     void Update()
     {
@@ -23,7 +17,7 @@ public class PlayersManager : MonoBehaviour
         {
             myId = players.Length - 1;
         }
-
+         
         if (lastLength != players.Length)
         {
             lastLength = players.Length;

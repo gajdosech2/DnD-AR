@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class NetManager: NetworkManager
 {
-    public GameObject menu;
 
     public void Host()
     {
@@ -24,12 +23,6 @@ public class NetManager: NetworkManager
     {
         NetworkManager.singleton.networkAddress = "90.64.193.109";
         NetworkManager.singleton.networkPort = 7777;
-        menu.SetActive(false);
-    }
-
-    void Start()
-    {
-        menu.SetActive(true);
     }
 
 }

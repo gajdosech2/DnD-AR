@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonHighlightManagerSrc : MonoBehaviour
+public class ButtonHighlightManager : MonoBehaviour
 {
 
     public List<Button> amountButtons;

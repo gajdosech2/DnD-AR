@@ -5,13 +5,10 @@ using UnityEngine.UI;
 
 public class DiceRollManager : MonoBehaviour
 {
-
     int amount;
     int type;
 
     List<int> results;
-
-    public GameObject questionManager;
 
     public GameObject diceRollPanel;
     public GameObject btnResults;
@@ -19,6 +16,14 @@ public class DiceRollManager : MonoBehaviour
 
     float maxTime = 3.0f;
     float startTime = 0;
+
+    PlayerTurn playerTurn;
+
+    public void activateSelf(PlayerTurn turn)
+    {
+        diceRollPanel.SetActive(true);
+        playerTurn = turn;
+    }
     
     public void throwDice()
     {
@@ -38,7 +43,7 @@ public class DiceRollManager : MonoBehaviour
             btnResultsSum.GetComponent<UnityEngine.UI.Text>().text = sum + "";
 
             diceRollPanel.SetActive(false);
-            questionManager.GetComponent<QuestionManager>().activateSelf();
+            playerTurn.CmdTriggerQuestion();
         }
     }
 
