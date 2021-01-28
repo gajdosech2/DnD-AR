@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class ButtonHighlightManagerSrc : MonoBehaviour
 {
 
+    public Text description;
+    public List<string> descriptions;
+
     public List<Button> amountButtons;
     public List<Sprite> amountSpritesOn;
     public List<Sprite> amountSpritesOff;
@@ -21,6 +24,7 @@ public class ButtonHighlightManagerSrc : MonoBehaviour
             if (i == id)
             {
                 typeButtons[i].image.sprite = typeSpritesOn[i];
+                description.text = descriptions[i];
             }
             else
             {
