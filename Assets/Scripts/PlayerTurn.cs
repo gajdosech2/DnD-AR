@@ -82,8 +82,8 @@ public class PlayerTurn : NetworkBehaviour
     bool CanMove(Vector3 new_pos)
     {
         new_pos.y = 0;
-        return (new_pos.x > -0.45 && new_pos.z > -0.45 && new_pos.x < 0.45 && new_pos.z < 0.45) ||
-            (Physics.OverlapSphere(new_pos, 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide).Length > 0);
+        return (new_pos.x > -0.41 && new_pos.z > -0.41 && new_pos.x < 0.41 && new_pos.z < 0.41) ||
+            (Physics.OverlapSphere(new_pos, 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide).Length > 0);
     }
 
     void Turn()
