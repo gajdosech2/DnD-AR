@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class DiceRollManager : MonoBehaviour
 {
-    int amount;
-    int type;
+    private int amount;
 
     List<int> results;
 
@@ -17,24 +16,28 @@ public class DiceRollManager : MonoBehaviour
     float maxTime = 3.0f;
     float startTime = 0;
 
-    PlayerTurn playerTurn;
+    PlayerTurn turn;
 
-    public void activateSelf(PlayerTurn turn)
+    public void initialize(PlayerTurn turn)
+    {
+        this.turn = turn;
+    }
+
+    public void activateSelf()
     {
         diceRollPanel.SetActive(true);
-        playerTurn = turn;
     }
     
     public void throwDice()
     {
-        if (amount > 0 && type > 0)
+        if (amount > 0 && turn.questionType > 0)
         {
             results = new List<int>();
             int sum = 0;
             string strResults = "";
             for (int i = 0; i < amount; i++)
             {
-                int value = Random.Range(1, type + 1);
+                int value = Random.Range(1, turn.questionType + 1);
                 results.Add( value );
                 sum += value;
                 strResults += value + ((i+1) == amount ? "" : " + ");
@@ -43,7 +46,7 @@ public class DiceRollManager : MonoBehaviour
             btnResultsSum.GetComponent<UnityEngine.UI.Text>().text = sum + "";
 
             diceRollPanel.SetActive(false);
-            playerTurn.CmdTriggerQuestion();
+            turn.CmdTriggerQuestion();
         }
     }
 
@@ -63,7 +66,7 @@ public class DiceRollManager : MonoBehaviour
 
     public void setType(int nType)
     {
-        type = nType;
+        turn.CmdSetQuestionType(nType);
     }
 
     public void displayRoll()
@@ -75,7 +78,7 @@ public class DiceRollManager : MonoBehaviour
 
     public int getType()
     {
-        return type;
+        return turn.questionType;
     }
 
     public int getResultsSum()

@@ -15,6 +15,9 @@ public class PlayerTurn : NetworkBehaviour
     [SyncVar]
     public bool triggerQuestion = false;
 
+    [SyncVar]
+    public int questionType = 0;
+
     QuestionManager questionManager;
     DiceRollManager diceRollManager;
     Animator animator;
@@ -22,7 +25,7 @@ public class PlayerTurn : NetworkBehaviour
 
     Text movementText, experienceText;
 
-    private int exp = 0;
+    int exp = 0;
 
     const float ATTACK_SPEED = 0.75f;
     float attack_lerp = 1.0f;
@@ -50,6 +53,7 @@ public class PlayerTurn : NetworkBehaviour
             attack = GameObject.Find("AttackButton").GetComponent<GUIButton>();
             dice = GameObject.Find("DiceButton").GetComponent<GUIButton>();
             diceRollManager = GameObject.Find("RollManager").GetComponent<DiceRollManager>();
+            diceRollManager.initialize(this);
             questionManager = GameObject.Find("QuestionManager").GetComponent<QuestionManager>();
             movementText = GameObject.Find("MovementText").GetComponent<Text>();
             experienceText = GameObject.Find("ExperienceText").GetComponent<Text>();
@@ -134,7 +138,7 @@ public class PlayerTurn : NetworkBehaviour
         }
         else if (dice.GetDown())
         {
-            diceRollManager.activateSelf(this);
+            diceRollManager.activateSelf();
         }
     }
 
@@ -157,6 +161,12 @@ public class PlayerTurn : NetworkBehaviour
         {
             StartCoroutine(DestroyEnemyAfterSecond(closest_enemy.GetComponent<NetworkIdentity>().netId));
         }
+    }
+
+    [Command]
+    public void CmdSetQuestionType(int type)
+    {
+        questionType = type;
     }
 
     [Command]

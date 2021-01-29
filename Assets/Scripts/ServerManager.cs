@@ -8,20 +8,24 @@ public class ServerManager : NetworkBehaviour
 {
     int player_on_turn = 0;
     List<int> initiatives = new List<int>();
+    PlayerTurn current;
 
-   [Server]
+    [Server]
     private void FixedUpdate()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        PlayerTurn current = players[player_on_turn].GetComponent<PlayerTurn>();
+        if (current == null)
+        {
+            current = players[player_on_turn].GetComponent<PlayerTurn>();
+        }
 
         UpdateInitiatives(players);
-        ChangeTurn(players, current);
-        CheckQuestion(players, current);
+        ChangeTurn(players);
+        CheckQuestion(players);
     }
 
     [Server]
-    private void ChangeTurn(GameObject[] players, PlayerTurn current)
+    private void ChangeTurn(GameObject[] players)
     {
         player_on_turn = player_on_turn % players.Length;
         
@@ -41,17 +45,20 @@ public class ServerManager : NetworkBehaviour
             }
 
             next.movement = 25;
+            current = next;
         }
     }
 
     [Server]
-    private void CheckQuestion(GameObject[] players, PlayerTurn current)
+    private void CheckQuestion(GameObject[] players)
     {
-        if (current.triggerQuestion == true)
+        if (current.triggerQuestion)
         {
             foreach (GameObject player in players)
             {
-                player.GetComponent<PlayerTurn>().askQuestion = true;
+                PlayerTurn turn = player.GetComponent<PlayerTurn>();
+                turn.askQuestion = true;
+                turn.questionType = current.questionType;
             }
             current.triggerQuestion = false;
         }
@@ -66,5 +73,6 @@ public class ServerManager : NetworkBehaviour
             initiatives.Add(player.GetComponent<Initiative>().initiative);
         }
         initiatives.Sort();
+        initiatives.Reverse();
     }
 }
