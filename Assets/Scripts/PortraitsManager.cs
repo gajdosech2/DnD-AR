@@ -8,22 +8,11 @@ public class PortraitsManager : MonoBehaviour
 {
     public GameObject[] portraits;
     public Material[] mats;
-    Initiative init;
 
     int myId = -1;
 
-    public void Initialize(Initiative init)
-    {
-        this.init = init;
-    }
-
     void Update()
     {
-        if (!init)
-        {
-            return;
-        }
-
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length > 0 && myId == -1)
         {

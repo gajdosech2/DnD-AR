@@ -12,7 +12,6 @@ public class Initiative : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            GameObject.Find("Portraits").GetComponent<PortraitsManager>().Initialize(this);
             CmdSetInitiative();
         }
     }
@@ -20,6 +19,17 @@ public class Initiative : NetworkBehaviour
     [Command]
     public void CmdSetInitiative()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        List<int> initiatives = new List<int>();
+        foreach (GameObject player in players)
+        {
+            initiatives.Add(player.GetComponent<Initiative>().initiative);
+        }
+    
         initiative = Random.Range(1, 20);
+        while (initiatives.Contains(initiative))
+        {
+            initiative = Random.Range(1, 20);
+        }
     }
 }
