@@ -8,7 +8,7 @@ public class ServerManager : NetworkBehaviour
 {
     int player_on_turn = 0;
     List<int> initiatives = new List<int>();
-    PlayerTurn current;
+    PlayerTurn current = null;
 
     [Server]
     private void FixedUpdate()
@@ -16,6 +16,7 @@ public class ServerManager : NetworkBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (current == null)
         {
+            player_on_turn = 0;
             current = players[player_on_turn].GetComponent<PlayerTurn>();
         }
 

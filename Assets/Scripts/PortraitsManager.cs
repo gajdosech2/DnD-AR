@@ -10,6 +10,7 @@ public class PortraitsManager : MonoBehaviour
     public Material[] mats;
 
     int myId = -1;
+    int lastLength = 0;
 
     void Update()
     {
@@ -19,27 +20,40 @@ public class PortraitsManager : MonoBehaviour
             myId = players.Length - 1;
         }
 
-        UpdatePortraits(players);
+        UpdateInitiatives(players);
+
+        if (players.Length != lastLength)
+        {
+            UpdatePortraits(players);
+        }
+
     }
 
     void UpdatePortraits(GameObject[] players)
     {
+        for (int i = 0; i < portraits.Length; i++)
+        {
+            portraits[i].SetActive(false);
+        }
+
         for (int i = 0; i < players.Length && i < portraits.Length; i++)
         {
-            if (!portraits[i].activeSelf)
+            GameObject omni = players[i].transform.Find("omniknight").gameObject;
+            omni.GetComponent<Renderer>().material = mats[i % mats.Length];
+            portraits[i].SetActive(true);
+            portraits[i].transform.Find("Self").gameObject.SetActive(false);
+            if (i == myId)
             {
-                GameObject omni = players[i].transform.Find("omniknight").gameObject;
-                omni.GetComponent<Renderer>().material = mats[i % mats.Length];
-
-                portraits[i].SetActive(true);
-
-                portraits[i].transform.Find("Self").gameObject.SetActive(false);
-                if (i == myId)
-                {
-                    portraits[i].transform.Find("Self").gameObject.SetActive(true);
-                }
+                portraits[i].transform.Find("Self").gameObject.SetActive(true);
             }
+        }
+        lastLength = players.Length;
+    }
 
+    void UpdateInitiatives(GameObject[] players)
+    {
+        for (int i = 0; i < players.Length && i < portraits.Length; i++)
+        {
             Text number = portraits[i].transform.Find("Number").gameObject.GetComponent<Text>();
             int player_initiative = players[i].GetComponent<Initiative>().initiative;
             number.text = player_initiative.ToString("00");
