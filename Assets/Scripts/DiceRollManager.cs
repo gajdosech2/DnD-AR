@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DiceRollManager : MonoBehaviour
 {
-    private int amount;
+    private int amount = 1;
 
     List<int> results;
 
