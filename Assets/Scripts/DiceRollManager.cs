@@ -78,6 +78,11 @@ public class DiceRollManager : MonoBehaviour
         return type;
     }
 
+    public int getAmount()
+    {
+        return amount;
+    }
+
     public int getResultsSum()
     {
         int sum = 0;
